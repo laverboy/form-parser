@@ -29,9 +29,8 @@ class FormParser
             $dom->loadHTMLFile($templateFile);
             $this->DOMXPath = new DOMXPath($dom);
         } catch(\Exception $e){
-            throw new \InvalidArgumentException("Could not load template file");
+            throw new \InvalidArgumentException("Could not load template file.");
         }
-
     }
 
     public function inputExists($input)
@@ -42,8 +41,13 @@ class FormParser
     public function getRequiredFields() {
 
         $requiredFields = $this->DOMXPath->query( "//input[@required='']" );
-
         return $this->getFieldNames($requiredFields);
+    }
+
+    public function getEmailFields() {
+
+        $emailFields = $this->DOMXPath->query( "//input[@type='email']" );
+        return $this->getFieldNames($emailFields);
     }
 
     private function getFieldNames($DOMElements) {

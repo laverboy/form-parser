@@ -14,7 +14,6 @@ class FormParserTest extends \PHPUnit_Framework_TestCase
         $this->testDir = dirname(dirname(__FILE__)) . '/form-samples/';
     }
 
-
     public function testInstantiatesWithForm()
     {
         $fp = new FormParser($this->testDir . 'contact-form.php');
@@ -51,6 +50,13 @@ class FormParserTest extends \PHPUnit_Framework_TestCase
         ];
         $fp = new FormParser($this->testDir . 'contact-form.php');
         $this->assertEquals($expected, $fp->getRequiredFields());
+    }
+
+    public function testGetEmailFieldsReturnsAllEmailFields()
+    {
+        $expected = ['email'];
+        $fp = new FormParser($this->testDir . 'contact-form.php');
+        $this->assertEquals($expected, $fp->getEmailFields());
     }
 
 }
