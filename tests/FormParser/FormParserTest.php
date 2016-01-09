@@ -59,4 +59,16 @@ class FormParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $fp->getEmailFields());
     }
 
+    public function testGetLabelsReturnsAllLabels()
+    {
+        $expected = [
+            'firstname' => 'Your first name',
+            'lastname' => 'Your last name',
+            'email' => 'Email',
+            'message' => 'Your message',
+        ];
+        $fp = new FormParser($this->testDir . 'contact-form.php');
+        $this->assertEquals($expected, $fp->getLabels());
+    }
+
 }
