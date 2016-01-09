@@ -15,12 +15,12 @@
     },
     "autoload": {
         "psr-4": {
-            "FormParser\\": "src"
+            "FormParser\\": "src/FormParser"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "FormParser\\Test\\": "test"
+            "FormParser\\": "tests/FormParser"
         }
     }
 }
