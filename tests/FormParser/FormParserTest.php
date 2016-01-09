@@ -1,18 +1,44 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mlaver
- * Date: 09/01/2016
- * Time: 11:38
- */
 
 namespace FormParser;
 
+class FormParserTest extends \PHPUnit_Framework_TestCase
+{
+    private $testDir;
 
-class FormParserTest extends \PHPUnit_Framework_TestCase {
+    protected function setUp()
+    {
+        parent::setUp();
 
-	public function test_form_parser_returns_true(){
-		$this->assertTrue(true);
-	}
+        $this->testDir = dirname(dirname(__FILE__)) . '/form-samples/';
+    }
+
+
+    public function testInstantiatesWithForm()
+    {
+        $fp = new FormParser($this->testDir . 'contact-form.php');
+        $this->assertInstanceOf('FormParser\FormParser', $fp);
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testThrowsExceptionWhenTemplateNotFound()
+    {
+        $fp = new FormParser();
+        $fp->setTemplate('there-is-no-spoon.php');
+    }
+
+    public function testInputExistsReturnsTrue()
+    {
+        $fp = new FormParser($this->testDir . 'contact-form.php');
+        $this->assertTrue($fp->inputExists('firstname'));
+    }
+
+    public function testInputExistsReturnsFalse()
+    {
+        $fp = new FormParser($this->testDir . 'contact-form.php');
+        $this->assertFalse($fp->inputExists('ghost'));
+    }
 
 }
