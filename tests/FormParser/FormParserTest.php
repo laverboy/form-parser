@@ -4,6 +4,7 @@ namespace FormParser;
 
 class FormParserTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var  string */
     private $testDir;
 
     protected function setUp()
@@ -39,6 +40,17 @@ class FormParserTest extends \PHPUnit_Framework_TestCase
     {
         $fp = new FormParser($this->testDir . 'contact-form.php');
         $this->assertFalse($fp->inputExists('ghost'));
+    }
+
+    public function testGetRequiredFieldsReturnsAllRequiredFields()
+    {
+        $expected = [
+            'firstname',
+            'lastname',
+            'email',
+        ];
+        $fp = new FormParser($this->testDir . 'contact-form.php');
+        $this->assertEquals($expected, $fp->getRequiredFields());
     }
 
 }

@@ -2,10 +2,13 @@
 
 namespace FormParser;
 
+use DOMDocument;
+use DOMXPath;
+
 class FormParser
 {
     /** @var \DOMXPath */
-    protected $domxpath;
+    protected $DOMXPath;
 
     /**
      * FormParser constructor.
@@ -21,10 +24,10 @@ class FormParser
 
     public function setTemplate($templateFile)
     {
-        $dom = new \DOMDocument;
+        $dom = new DOMDocument;
         try {
             $dom->loadHTMLFile($templateFile);
-            $this->domxpath = new \DOMXPath($dom);
+            $this->DOMXPath = new DOMXPath($dom);
         } catch(\Exception $e){
             throw new \InvalidArgumentException("Could not load template file");
         }
@@ -33,7 +36,23 @@ class FormParser
 
     public function inputExists($input)
     {
-        return (bool) $this->domxpath->query( "//input[@name='$input']" )->length;
+        return (bool) $this->DOMXPath->query( "//input[@name='$input']" )->length;
+    }
+
+    public function getRequiredFields() {
+
+        $requiredFields = $this->DOMXPath->query( "//input[@required='']" );
+
+        return $this->getFieldNames($requiredFields);
+    }
+
+    private function getFieldNames($DOMElements) {
+        $fields = [];
+        /** @var \DOMElement $node */
+        foreach ( $DOMElements as $node ) {
+            $fields[] = $node->getAttribute( 'name' );
+        }
+        return $fields;
     }
 
 }
