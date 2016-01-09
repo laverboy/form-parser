@@ -18,6 +18,11 @@
 		Your message
 		<textarea name="message" id="message" cols="30" rows="10">I want to know everything...</textarea>
 	</label>
+
+	<label>
+		Other
+		<input type="text" name="other" value="">
+	</label>
 </div>
 
 <div>
