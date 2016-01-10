@@ -1,6 +1,9 @@
 {
     "name": "laverboy/form-parser",
     "description": "Extract information from your form templates for use with validators, verifiers etc",
+    "keywords": ["forms","parser","validation"],
+    "homepage": "https://github.com/laverboy/form-parser",
+    "license": "MIT",
     "authors": [
         {
             "name": "Matthew Laver",
