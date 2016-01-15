@@ -4,10 +4,10 @@ Form Parser
 A simple utility to read a form template and pull out 
 information useful to validators and from verifiers.
 
-Installation
+**Not Yet - Installation
 ------------
 ```bash
-$ composer require laverboy/form-parser
+// $ composer require laverboy/form-parser
 ```
 
 Usage
